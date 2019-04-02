@@ -2,6 +2,7 @@ package com.siid.webapi.message.messageapi.domain;
 
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
+import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,6 +12,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "device_detail")
+@Proxy(lazy = false)
 public class DeviceDetailEntity implements Serializable {
     private Integer id;
     private Integer modelId;
@@ -34,10 +36,8 @@ public class DeviceDetailEntity implements Serializable {
     private Integer customerId;
 
 
-
-
     @Id
-    @NotFound(action=NotFoundAction.IGNORE)
+    @NotFound(action = NotFoundAction.IGNORE)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     public Integer getId() {
@@ -49,7 +49,7 @@ public class DeviceDetailEntity implements Serializable {
     }
 
     @Basic
-    @Column(name="customer_id")
+    @Column(name = "customer_id")
     public Integer getCustomerId() {
         return customerId;
     }
@@ -70,9 +70,13 @@ public class DeviceDetailEntity implements Serializable {
 
     @Basic
     @Column(name = "description")
-    public String getDescription() { return description; }
+    public String getDescription() {
+        return description;
+    }
 
-    public void setDescription(String description) { this.description = description; }
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     @Basic
     @Column(name = "iot_id")
@@ -263,7 +267,7 @@ public class DeviceDetailEntity implements Serializable {
 
     private DeviceModelEntity model;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "model_id", insertable = false, updatable = false)
     public DeviceModelEntity getModel() {
         return model;

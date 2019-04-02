@@ -1,5 +1,7 @@
 package com.siid.webapi.message.messageapi.service;
 
+import com.siid.webapi.message.messageapi.domain.DeviceDetailEntity;
+import com.siid.webapi.message.messageapi.domain.DeviceModelEntity;
 import com.siid.webapi.message.messageapi.model.StreetLight;
 import com.siid.webapi.message.messageapi.repository.DeviceDetailRepository;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
@@ -9,8 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service

@@ -44,8 +44,6 @@ public class RabbitMQServiceTest {
     public void getFilterData() {
         List<StreetLight> streetLights1 = new ArrayList<>();
         rabbitMQService.getFilterData(streetLights1);
-//        Object o = rabbitTemplate.receiveAndConvert("light.siid");
-//        Object o1 = rabbitTemplate.receiveAndConvert("light.aa123");
 
     }
 }

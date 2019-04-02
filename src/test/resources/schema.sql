@@ -152,34 +152,34 @@ CREATE TABLE "device_position" (
 ) COMMENT='设备位置';
 
 
-CREATE TABLE "device_type" (
-  "id" int(11) NOT NULL AUTO_INCREMENT,
-  "name" varchar(30) NOT NULL,
-  "add_user" char(36) NOT NULL,
-  "add_time" datetime NOT NULL,
-  "last_user" char(36) DEFAULT NULL,
-  "last_time" datetime DEFAULT NULL,
-  PRIMARY KEY ("id")
-);
+CREATE TABLE `device_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(30) NOT NULL,
+  `add_user` char(36) NOT NULL,
+  `add_time` datetime NOT NULL,
+  `last_user` char(36) DEFAULT NULL,
+  `last_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ;
 
 
-CREATE TABLE "device_model" (
-  "id" int(11) NOT NULL AUTO_INCREMENT,
-  "key" varchar(20) NOT NULL,
-  "name" varchar(30) NOT NULL,
-  "is_gateway" tinyint(1) NOT NULL DEFAULT '0',
-  "device_type_id" int(11) NOT NULL,
-  "description" varchar(100) DEFAULT NULL,
-  "add_user" char(36) NOT NULL,
-  "add_time" datetime NOT NULL,
-  "last_user" char(36) DEFAULT NULL,
-  "last_time" datetime DEFAULT NULL,
-  `iot_platform` int(11) DEFAULT '0',
-  PRIMARY KEY ("id"),
-  UNIQUE KEY "key" ("key"),
+CREATE TABLE `device_model` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `key` varchar(20) NOT NULL,
+  `name` varchar(30) NOT NULL,
+  `is_gateway` tinyint(1) NOT NULL DEFAULT '0',
+  `device_type_id` int(11) NOT NULL,
+  `description` varchar(100) DEFAULT NULL,
+  `add_user` char(36) NOT NULL,
+  `add_time` datetime NOT NULL,
+  `last_user` char(36) DEFAULT NULL,
+  `last_time` datetime DEFAULT NULL,
+  `iot_platform` int(11) NOT NULL DEFAULT '0' COMMENT '0--Unknown\n1--Aliyun IOT',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `key` (`key`),
   KEY `FKdevice_mod711226` (`device_type_id`),
   CONSTRAINT `FKdevice_mod711226` FOREIGN KEY (`device_type_id`) REFERENCES `device_type` (`id`)
-);
+) ;
 
 CREATE TABLE "device_install_record"(
    "id" int(11)  NOT NULL AUTO_INCREMENT,
