@@ -18,10 +18,8 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
-        //表明在topic、queue、users这三个域上可以向客户端发消息。
-        registry.enableSimpleBroker("/topic", "/queue", "/user");
-        //客户端向服务端发起请求时，需要以/app为前缀。
-        registry.setApplicationDestinationPrefixes("/app");
+        //表明在topic、queue可以向客户端发消息。
+        registry.enableSimpleBroker("/topic", "/queue");
         //给指定用户发送一对一的消息前缀是/user
         registry.setUserDestinationPrefix("/user");
     }

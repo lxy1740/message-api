@@ -15,6 +15,18 @@ public class StreetLight {
     private String description;
     private String positionNumber;
 
+    @Override
+    public String toString() {
+        return "id:"+this.id
+                +" name:"+this.name
+                +" description:"+this.description
+                +" positionNumber:"+this.positionNumber
+                +" current:"+this.current
+                +" level:"+this.level
+                +" rule"+this.rule
+                +" ruleId"+this.ruleId;
+    }
+
     public StreetLight(){
     }
 

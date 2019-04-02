@@ -1,9 +1,9 @@
 package com.siid.webapi.message.messageapi.ControllerTest;
 
+import com.siid.webapi.message.messageapi.controller.WebSocketController;
 import com.siid.webapi.message.messageapi.model.GeoPoint;
 import com.siid.webapi.message.messageapi.model.StreetLight;
 import com.siid.webapi.message.messageapi.model.StreetLightRule;
-import com.siid.webapi.message.messageapi.service.RabbitMQService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,13 +18,13 @@ import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class RabbitMQServiceTest {
-
-    @Autowired
-    RabbitMQService rabbitMQService;
+public class WebSocketControllerTest {
 
     @Autowired
     RabbitTemplate rabbitTemplate;
+
+    @Autowired
+    WebSocketController webSocketController;
 
     private List<StreetLight> streetLights = new ArrayList<>();
 
@@ -43,7 +43,7 @@ public class RabbitMQServiceTest {
     @Test
     public void getFilterData() {
         List<StreetLight> streetLights1 = new ArrayList<>();
-        rabbitMQService.getFilterData(streetLights1);
+        webSocketController.sendLightInfoToUser(streetLights1);
 
     }
 }
