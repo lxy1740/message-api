@@ -1,18 +1,28 @@
 package com.siid.webapi.message.messageapi.model;
 
 
+import java.util.UUID;
+
 public class QueueArgs {
     private String deviceType;
     private String infoType;
-    private int consumerId;
+    private UUID consumerId;
 
     public QueueArgs() {
 
     }
 
-    public QueueArgs(String deviceType, String infoType, int consumerId) {
+    public QueueArgs(String deviceType, String infoType,UUID consumerId) {
         this.deviceType = deviceType;
         this.infoType = infoType;
+        this.consumerId=consumerId;
+    }
+
+    public UUID getConsumerId() {
+        return consumerId;
+    }
+
+    public void setConsumerId(UUID consumerId) {
         this.consumerId = consumerId;
     }
 
@@ -26,14 +36,6 @@ public class QueueArgs {
 
     public String getInfoType() {
         return infoType;
-    }
-
-    public int getConsumerId() {
-        return consumerId;
-    }
-
-    public void setConsumerId(int consumerId) {
-        this.consumerId = consumerId;
     }
 
     public void setInfoType(String infoType) {

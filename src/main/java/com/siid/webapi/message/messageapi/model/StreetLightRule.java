@@ -8,6 +8,9 @@ public class StreetLightRule {
         this.id = id;
         this.name = name;
     }
+    public StreetLightRule(){
+
+    }
 
     public int getId() {
         return id;

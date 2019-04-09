@@ -10,6 +10,9 @@ public class GeoPoint {
         this.lng = lng;
         this.lat = lat;
     }
+    public GeoPoint(){
+
+    }
 
     public BigDecimal getLng() {
         return lng;

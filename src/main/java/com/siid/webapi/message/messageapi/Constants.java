@@ -1,5 +1,7 @@
 package com.siid.webapi.message.messageapi;
 
+import java.util.UUID;
+
 public class Constants {
     private Constants(){
 
