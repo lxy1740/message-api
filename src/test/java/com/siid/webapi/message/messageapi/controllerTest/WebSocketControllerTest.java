@@ -63,9 +63,8 @@ public class WebSocketControllerTest {
 
     @Before
     public void setUp(){
-        token=securityApi.login("1","1");
+        token=securityApi.login("new","123");
         args=new QueueArgs("device","state", UUID.randomUUID());
-        rabbitMQService.createQueue(args,1);
 
         Exchange exchange=new TopicExchange("device.state",true,false,null);
         amqpAdmin.declareExchange(exchange);
