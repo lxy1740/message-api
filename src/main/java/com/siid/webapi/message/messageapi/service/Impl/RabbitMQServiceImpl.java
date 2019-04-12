@@ -21,13 +21,13 @@ public class RabbitMQServiceImpl implements RabbitMQService {
 
     @Override
     public void createQueue(QueueArgs args, Integer customerId) {
-        String queueName = args.getDeviceType() + "."+customerId+"." + args.getInfoType()+"."+args.getConsumerId();
+        String queueName = args.getDeviceType() + ".customer_"+customerId+"." + args.getInfoType()+"."+args.getConsumerId();
         Map<String, Object> argurements = new HashMap<>();
         argurements.put("x-message-ttl", 180000);
         Queue queue = new Queue(queueName, true, false, true, argurements);
         amqpAdmin.declareQueue(queue);
 
-        String routingKey = args.getDeviceType() + "." + customerId + "." + args.getInfoType() + ".#";
+        String routingKey = args.getDeviceType() + ".customer_" + customerId + "." + args.getInfoType() + ".#";
         Binding binding = new Binding(queueName, Binding.DestinationType.QUEUE, "device." + args.getInfoType(), routingKey, null);
         amqpAdmin.declareBinding(binding);
     }
@@ -35,9 +35,9 @@ public class RabbitMQServiceImpl implements RabbitMQService {
 
     @Override
     public void deleteQueue(QueueArgs args, Integer customerId) {
-        String queueName = args.getDeviceType() + "." + customerId + "." + args.getInfoType()+"."+args.getConsumerId();
+        String queueName = args.getDeviceType() + ".customer_" + customerId + "." + args.getInfoType()+"."+args.getConsumerId();
         amqpAdmin.deleteQueue(queueName);
-        String routingKey = args.getDeviceType() + "." + customerId + "." + args.getInfoType()+".#";
+        String routingKey = args.getDeviceType() + ".customer_" + customerId + "." + args.getInfoType()+".#";
         Binding binding = new Binding(queueName, Binding.DestinationType.QUEUE, "device." + args.getInfoType(), routingKey, null);
         amqpAdmin.removeBinding(binding);
     }
