@@ -1,24 +1,16 @@
 package com.siid.webapi.message.messageapi.service.Impl;
 
-import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.ConnectionFactory;
 import com.siid.webapi.message.messageapi.model.QueueArgs;
-import com.siid.webapi.message.messageapi.model.StreetLight;
 import com.siid.webapi.message.messageapi.service.RabbitMQService;
 import org.springframework.amqp.core.AmqpAdmin;
 import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
-import java.util.concurrent.TimeoutException;
 
 @Service
 public class RabbitMQServiceImpl implements RabbitMQService {
