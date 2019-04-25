@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 @Service
 public class RabbitMQServiceImpl implements RabbitMQService {
@@ -20,25 +21,28 @@ public class RabbitMQServiceImpl implements RabbitMQService {
     RabbitTemplate rabbitTemplate;
 
     @Override
-    public void createQueue(QueueArgs args, Integer customerId) {
-        String queueName = args.getDeviceType() + ".customer_"+customerId+"." + args.getInfoType()+"."+args.getConsumerId();
+    public String createQueue(QueueArgs args, Integer customerId) {
+        String queueName = "device.customer_"+customerId+"." + args.getInfoType()+"."+args.getConsumerId();
         Map<String, Object> argurements = new HashMap<>();
         argurements.put("x-message-ttl", 180000);
-        Queue queue = new Queue(queueName, true, false, true, argurements);
+        Queue queue = new Queue(queueName, false, true, true, argurements);
         amqpAdmin.declareQueue(queue);
 
-        String routingKey = args.getDeviceType() + ".customer_" + customerId + "." + args.getInfoType() + ".#";
-        Binding binding = new Binding(queueName, Binding.DestinationType.QUEUE, "device." + args.getInfoType(), routingKey, null);
+        String routingKey = "device.customer_" + customerId + "."+args.getInfoType()+".#";//infoType:state,light,air,manhole
+        Binding binding = new Binding(queueName, Binding.DestinationType.QUEUE, "device.state" , routingKey, null);
         amqpAdmin.declareBinding(binding);
+
+        return queueName;
+
     }
 
 
     @Override
     public void deleteQueue(QueueArgs args, Integer customerId) {
-        String queueName = args.getDeviceType() + ".customer_" + customerId + "." + args.getInfoType()+"."+args.getConsumerId();
+        String queueName = "device.customer_" + customerId + "." + args.getInfoType()+"."+args.getConsumerId();
         amqpAdmin.deleteQueue(queueName);
-        String routingKey = args.getDeviceType() + ".customer_" + customerId + "." + args.getInfoType()+".#";
-        Binding binding = new Binding(queueName, Binding.DestinationType.QUEUE, "device." + args.getInfoType(), routingKey, null);
+        String routingKey = "device.customer_" + customerId + "."+args.getInfoType()+".#";
+        Binding binding = new Binding(queueName, Binding.DestinationType.QUEUE, "device.state" + args.getInfoType(), routingKey, null);
         amqpAdmin.removeBinding(binding);
     }
 }

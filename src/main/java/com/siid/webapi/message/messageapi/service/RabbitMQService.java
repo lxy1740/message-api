@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface RabbitMQService {
-    public void createQueue(QueueArgs args, Integer customerId);
+    public String createQueue(QueueArgs args, Integer customerId);
 
     public void deleteQueue(QueueArgs args, Integer customerId);
 

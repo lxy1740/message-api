@@ -7,5 +7,5 @@ public class Constants {
 
     }
     public static final String URI_API_PREFIX="/api";
-    public static final String URI_WEBSOCKET="/web/socket";
+    public static final String URI_WEBSOCKET="/webSocket";
 }

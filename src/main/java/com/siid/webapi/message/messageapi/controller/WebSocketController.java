@@ -23,14 +23,14 @@ public class WebSocketController {
 
 
     @ApiOperation(value="动态创建队列")
-    @PostMapping(value="/create/queue",produces = "application/json")
-    public void createQueue(@RequestBody QueueArgs queueArgs){
+    @PostMapping(value="/createQueue",produces = "application/json")
+    public String createQueue(@RequestBody QueueArgs queueArgs){
         customerId=userTokenService.getCustomerId();
-        rabbitMQService.createQueue(queueArgs, customerId);
+        return rabbitMQService.createQueue(queueArgs, customerId);
     }
 
     @ApiOperation(value="动态删除队列")
-    @DeleteMapping(value="/delete/queue",produces = "application/json")
+    @DeleteMapping(value="/deleteQueue",produces = "application/json")
     public void deleteQueue(@RequestBody QueueArgs queueArgs){
         customerId = userTokenService.getCustomerId();
         rabbitMQService.deleteQueue(queueArgs, customerId);

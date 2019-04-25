@@ -33,27 +33,12 @@ public class WebSocketControllerTest {
 
     @Before
     public void setup() {
-        queueArgs=new QueueArgs("queue.test","state",UUID.fromString("9c15b664-2e4a-4a43-b446-cc24792eebc8"));
+
         //创建交换机
         Exchange exchange=new TopicExchange("device.state",true,false);
         amqpAdmin.declareExchange(exchange);
-        rabbitTemplate.convertAndSend("device.state",queueArgs.getDeviceType()+".1."+queueArgs.getInfoType()+".#","hello world!");
 
     }
 
 
-    @Test
-    public void createQueue() {
-        rabbitMQService.createQueue(queueArgs,1);
-    }
-
-    @Test
-    public void deleteQueue(){
-        rabbitMQService.deleteQueue(queueArgs,1);
-    }
-
-    @Test
-    public void receiveMess(){
-        rabbitTemplate.receive(queueArgs.getDeviceType()+".1."+queueArgs.getInfoType()+"."+queueArgs.getConsumerId());
-    }
 }
